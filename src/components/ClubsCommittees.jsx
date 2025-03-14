@@ -48,10 +48,10 @@ const ClubsCommittees = () => {
     },
     {
       id: 5,
-      name: "Training and Placement Cell", // Fixed typo in "Training"
+      name: "Training and Placement Cell", 
       role: "Public Relations Head",
       badge: "BIT Wardha",
-      description: "Coordinated placement activities for graduating students.", // Fixed capitalization
+      description: "Coordinated placement activities for graduating students.", 
       image: tnp
     },
     {
@@ -64,7 +64,6 @@ const ClubsCommittees = () => {
     }
   ]
 
-  // Handle keyboard events for accessibility
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && hoveredImage) {
@@ -73,8 +72,7 @@ const ClubsCommittees = () => {
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    
-    // Lock scroll when modal is open
+
     if (hoveredImage) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -87,7 +85,6 @@ const ClubsCommittees = () => {
     };
   }, [hoveredImage]);
 
-  // Handle swipe on mobile for image gallery
   const minSwipeDistance = 50;
 
   const handleTouchStart = (e) => {
@@ -129,19 +126,19 @@ const ClubsCommittees = () => {
           </p>
         </motion.div>
 
-        {/* Leadership Tiles - Enhanced Visual Grid with better mobile responsive layout */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 mb-10 sm:mb-16">
           {clubsData.map(({ id, name, role, badge, description, image }) => (
             <motion.div
               key={id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: Math.min(id * 0.1, 0.5) }} // Cap delay for better mobile experience
+              transition={{ duration: 0.3, delay: Math.min(id * 0.1, 0.5) }} 
               viewport={{ once: true, margin: "-50px" }}
               whileHover={{ y: -4, scale: 1.02 }}
               className="bg-primary-light rounded-lg shadow-xl overflow-hidden group border border-gray-800 flex flex-col"
             >
-              {/* Card Header with Image */}
+
               <div 
                 className="relative h-40 sm:h-48 overflow-hidden cursor-pointer"
                 onClick={() => setHoveredImage({ src: image, alt: name })}
@@ -160,8 +157,7 @@ const ClubsCommittees = () => {
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                
-                {/* Semi-transparent gradient overlay */}
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-black/20 pointer-events-none"></div>
                 
                 {/* Image zoom indicator on hover */}
@@ -207,7 +203,7 @@ const ClubsCommittees = () => {
           ))}
         </div>
 
-        {/* Full-screen image overlay with improved display and touch support */}
+    
         <AnimatePresence>
           {hoveredImage && (
             <motion.div
@@ -235,7 +231,7 @@ const ClubsCommittees = () => {
                   className="max-w-full max-h-[85vh] object-contain rounded shadow-2xl"
                 />
                 
-                {/* Close button with responsive positioning */}
+
                 <button 
                   className="absolute -top-10 sm:-top-12 right-0 bg-white/20 hover:bg-white/30 
                   text-white p-2 sm:p-3 rounded-full transition-colors focus:outline-none focus:ring-2 

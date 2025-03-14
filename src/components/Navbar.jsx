@@ -9,8 +9,8 @@ const Navbar = () => {
 
   const mainLinks = [
     { id: 1, link: 'skills', text: 'Skills' },
-    { id: 2, link: 'education', text: 'Education' },
     { id: 3, link: 'experience', text: 'Experience' },
+    { id: 2, link: 'education', text: 'Education' },
     { id: 4, link: 'projects', text: 'Projects' },
     { id: 5, link: 'clubs-committees', text: 'Clubs' },
     { id: 6, link: 'coding-profiles', text: 'Coding Profiles' },
@@ -44,7 +44,7 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-0 left-0 w-screen max-w-full h-16 sm:h-18 md:h-20 z-50 flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-12 bg-primary bg-opacity-90 backdrop-blur-md shadow-lg transition-all duration-300"
+        className="fixed top-0 w-screen max-w-screen h-16 sm:h-18 md:h-20 z-50 flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-12 bg-primary bg-opacity-90 backdrop-blur-md shadow-lg transition-all "
       >
         <div>
           <Link to="home" smooth duration={500}>
@@ -109,13 +109,14 @@ const Navbar = () => {
               onClick={handleClick}
             >
               <motion.div
-                initial={{ y: "-100%" }}
-                animate={{ y: 0 }}
-                exit={{ y: "-100%" }}
-                transition={{ type: "tween", duration: 0.3 }}
-                className="fixed top-0 left-0 right-0 w-screen h-screen bg-primary shadow-xl z-20 overflow-y-auto"
-                onClick={(e) => e.stopPropagation()}
-              >
+  initial={{ y: "-100%" }}
+  animate={{ y: 0 }}
+  exit={{ y: "-100%" }}
+  transition={{ type: "tween", duration: 0.3 }}
+  className="fixed inset-x-0 top-0 h-screen bg-primary shadow-xl z-20 overflow-y-auto"
+  onClick={(e) => e.stopPropagation()}
+>
+  
                 <div className="flex flex-col h-full pt-20 pb-6 px-6">
                   <ul className="flex-1 flex flex-col space-y-2">
                     {mobileLinks.map(({ id, link, text }) => (

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -256,9 +256,7 @@ const MainContent = () => {
   return (
     <motion.div 
       className="bg-primary min-h-screen"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+     
     >
       <Routes>
         <Route path="/" element={
@@ -267,8 +265,8 @@ const MainContent = () => {
             <Hero />
             <About />
             <Skills />
-            <Education />
             <Experience />
+            <Education />
             <Projects />
             <ClubsCommittees />
             <CodingProfiles />

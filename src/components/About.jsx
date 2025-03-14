@@ -32,7 +32,7 @@ const About = () => {
                 className="w-full h-full object-cover object-center"
                 loading="lazy"
               />
-              {/* Add subtle glow effect */}
+
               <div className="absolute inset-0 shadow-inner pointer-events-none border border-white/10"></div>
             </div>
           </motion.div>

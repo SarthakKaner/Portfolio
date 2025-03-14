@@ -13,7 +13,7 @@ const CodingProfiles = () => {
         problemsSolved: "600+",
         globalRank: "Top 7%",
       },
-      link: "hhttps://leetcode.com/u/sarthakkaner7777/",
+      link: "https://leetcode.com/u/sarthakkaner7777/",
       icon: <SiLeetcode size={50} />,
       color: "text-yellow-500",
       bgColor: "bg-yellow-500/10",

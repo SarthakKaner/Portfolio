@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,12 +9,50 @@ const Contact = () => {
     email: '',
     message: ''
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      const formDataToSubmit = new FormData();
+      formDataToSubmit.append('name', formData.name);
+      formDataToSubmit.append('email', formData.email);
+      formDataToSubmit.append('message', formData.message);
+      formDataToSubmit.append('_subject', 'New Portfolio Contact Message!');
+      formDataToSubmit.append('_captcha', 'false');
+      
+      const response = await fetch('https://formsubmit.co/e47f00e69e41c888193e6eb3de4aa7d4', {
+        method: 'POST',
+        body: formDataToSubmit,
+
+      });
+      
+      if (response.ok) {
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+        navigate('/message-confirmation');
+      } else {
+        alert('Failed to send message. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -33,6 +72,7 @@ const Contact = () => {
         </motion.div>
 
         <div className="flex flex-col md:flex-row gap-10">
+        
           <motion.div 
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -40,6 +80,7 @@ const Contact = () => {
             viewport={{ once: true }}
             className="md:w-1/2"
           >
+       
             <h3 className="text-2xl font-bold mb-6">Let's Connect & Create</h3>
             <p className="text-textSecondary mb-8">
             I'm always excited to explore new projects, exchange ideas, and collaborate on meaningful work. Whether you have a creative vision, a challenging problem, or an exciting opportunity, let's bring it to life together. Feel free to reach out through the form or connect with me on social media—I'd love to hear from you!
@@ -102,21 +143,22 @@ const Contact = () => {
             viewport={{ once: true }}
             className="md:w-1/2"
           >
+          
             <form 
               action="https://formsubmit.co/e47f00e69e41c888193e6eb3de4aa7d4" 
               method="POST"
+              onSubmit={handleSubmit}
               className="space-y-6"
             >
-              {/* Anti-spam honeypot field */}
+     
               <input type="text" name="_honey" style={{ display: 'none' }} />
               
-              {/* Disable captcha */}
+
               <input type="hidden" name="_captcha" value="false" />
 
-        <input type="hidden" name="_next" value={window.location.origin + "/message-confirmation"} />
-
-              {/* Email subject */}
               <input type="hidden" name="_subject" value="New Portfolio Contact Message!" />
+
+              <input type="hidden" name="_next" value={window.location.origin + "/message-confirmation"} />
 
               <div>
                 <label htmlFor="name" className="block text-textPrimary mb-2">Name</label>
@@ -162,9 +204,10 @@ const Contact = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 type="submit"
-                className="bg-secondary text-primary px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition-all duration-300"
+                disabled={isSubmitting}
+                className="bg-secondary text-primary px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition-all duration-300 disabled:opacity-70"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </motion.button>
             </form>
           </motion.div>

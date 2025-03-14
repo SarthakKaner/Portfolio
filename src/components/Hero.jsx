@@ -127,7 +127,7 @@ const Hero = () => {
           className="w-full sm:w-2/5 flex justify-center items-center mb-6 sm:mb-0"
         >
           <motion.div 
-            className="w-36 h-36 xs:w-44 xs:h-44 sm:w-52 sm:h-52 lg:w-64 lg:h-64 rounded-full relative"
+            className="w-36 h-36 xs:w-44 xs:h-44 sm:w-52 sm:h-52 lg:w-72 lg:h-72 rounded-full relative"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
           >
